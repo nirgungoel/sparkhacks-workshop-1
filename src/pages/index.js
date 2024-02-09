@@ -3,16 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
     const initialPizzas = [];
-    const initialFilterText = "";
-    const resultFromUseState = useState([initialPizzas]);
-    const pizzasFromState = resultFromUseState[0];
-    const setPizzas = resultFromUseState[1];
-    const [filterText, setFilterText] = useState(initialFilterText);
-
-    // updating state causes our page to reload
+    const initialFitlerText = "";
+    const resultFromUsedState = useState(initialPizzas);
+    const pizzasFromState = resultFromUsedState[0];
+    const setPizzas = resultFromUsedState[1];
+    const [filterText, setFilterText] = useState(initialFitlerText);
 
     useEffect(() => {
-        //track changes
         fetch("/api/pizzas")
             .then((data) => {
                 return data.json();
@@ -26,10 +23,12 @@ export default function Home() {
         const filteredPizzas = pizzasFromState.filter((pizza) => {
             return pizza.name.toLowerCase().includes(filterText);
         });
+
         return filteredPizzas.map((pizza, index) => {
             return <div key={index}> {pizza.name}</div>;
         });
     }
+
     return (
         <>
             <Head>
